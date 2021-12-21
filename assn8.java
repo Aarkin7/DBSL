@@ -1,7 +1,8 @@
-package SQL;
+package code;
+
 import java.util.*;
-import java.sql.*;  
-public class JavaSQL
+import java.sql.*; //connectivity 
+public class JavaA8
 {
 	public static void main(String[] args)throws Exception
 	{
@@ -10,15 +11,24 @@ public class JavaSQL
 		String name,address;
 				
 		
-		String url="jdbc:mysql://localhost/Demo";
+		String url="jdbc:mysql://localhost/javaA8"; //jdbc is API, mysql is DB, javaA8 - DB name
 
-		String username="root";
-		String password="1234";
+		String username="root";  //default username for mysql DB
+		String password="1234";  //given by user 
 		
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection conn=DriverManager.getConnection(url,username,password);
-		Statement st=conn.createStatement();
-		Scanner sc=new Scanner(System.in);
+		Class.forName("com.mysql.jdbc.Driver");  //This is the driver class for mysql DB
+		
+		Connection conn=DriverManager.getConnection(url,username,password);  
+		//A connection (session) with a specificdatabase. SQL statements are executed and results are returnedwithin the context of a connection. 
+        //A Connection object's database is able to provide informationdescribing its tables, its supported SQL grammar, its storedprocedures, the capabilities of this connection, and so on. Thisinformation is obtained with the getMetaData method
+
+		
+		
+		Statement st=conn.createStatement(); //The object used for executing a static SQL statementand returning the results it produces. 
+		
+		Scanner sc=new Scanner(System.in);  //For taking input
+		//A simple text scanner which can parse primitive types and strings usingregular expressions
+		
 		while(true)
 		{
 			System.out.println("\n1.Create table\n2.Insert data\n3.View data\n4.Delete Data\n5.Update\n6.Exit");
@@ -39,7 +49,11 @@ public class JavaSQL
 				name=sc.nextLine();
 				System.out.println("Enter address: ");
 				address=sc.nextLine();
+				
 				st.executeUpdate("insert into Students(id,name,address) values("+id+",'"+name+"','"+address+"')");
+				//Executes the given SQL statement, which may be an INSERT, UPDATE, or DELETE statement or 
+				//anSQL statement that returns nothing, such as an SQL DDL statement
+				
 				st=conn.createStatement();
 				System.out.println("Data added Successfully!!!");
 				break;
